@@ -12,7 +12,7 @@ class Handler<TInput, TOutput> implements IHandler<TInput, TOutput> {
 
     private readonly handler: RequestHandler<TInput, TOutput>;
 
-    constructor(handler: RequestHandler<TInput, TOutput>) {
+    constructor(handler?: RequestHandler<TInput, TOutput>) {
 
         if (!handler) { throw new Error('No handler is defined.'); }
 
@@ -45,7 +45,7 @@ class Handler<TInput, TOutput> implements IHandler<TInput, TOutput> {
  * Wrap your callback-based method
  * @param fn Callback-based method
  */
-const wrapCallbackMethod = <TInput, TOutput>(fn: (callback: (err: any, result: TOutput) => void) => void) => new Handler<TInput, TOutput>(promisify<TOutput>(fn));
+const wrapCallbackMethod = <TInput, TOutput>(fn: (input: TInput, callback: (err: any, result: TOutput) => void) => void) => new Handler<TInput, TOutput>(promisify<TInput, TOutput>(fn));
 
 /**
  * Wrap your promise-based method
@@ -54,7 +54,7 @@ const wrapCallbackMethod = <TInput, TOutput>(fn: (callback: (err: any, result: T
 const wrapPromiseMethod = <TInput, TOutput>(fn: (input: TInput) => Promise<TOutput>) => new Handler<TInput, TOutput>(fn);
 
 /**
- * Wrap your moder async/await method
+ * Wrap your modern async/await method
  * @param fn Async/await method
  */
 const wrapAsyncMethod = <TInput, TOutput>(fn: (input: TInput) => Promise<TOutput>) => new Handler<TInput, TOutput>(fn);
