@@ -53,7 +53,9 @@
       "coverage/**/*",
       "dist/**/*",
       "tests/**/*",
-      "**/*.d.ts"
+      "**/*.d.ts",
+      "src/index.ts",
+      "src/lib/index.ts"
     ],
     "reporter": [
       "text",
