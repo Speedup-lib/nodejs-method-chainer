@@ -2,6 +2,8 @@
  * Conductor
  */
 
+import Async from 'async';
+
 import IHandler from './type/handler';
 
 class Conductor {
@@ -35,11 +37,20 @@ class Conductor {
      */
     async runAsync<TInput, TOutput>(input: TInput): Promise<TOutput> {
 
-        // THIS LOOP DOESN'T WORK
-        return await this.handlers.reduce(
-            async (input: any, handler) => await handler.runAsync(input),
-            input
-        );
+        return new Promise<TOutput>((resolve, reject) => {
+
+            Async.reduce<IHandler<TInput, TOutput>, any>(
+                this.handlers,
+                input,
+                (input, handler, cb) => handler.runAsync(input).then(result => cb(null, result)).catch(cb),
+                (err, result: TOutput) => {
+
+                    if (err) { return reject(err); }
+
+                    return resolve(result);
+                }
+            );
+        });
     }
 }
 
