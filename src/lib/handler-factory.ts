@@ -36,7 +36,7 @@ class Handler<TInput, TOutput> implements IHandler<TInput, TOutput> {
      * @param input Input for the function
      */
     async runAsync(input: TInput): Promise<TOutput> {
-
+        
         return await this.handler(input);
     }
 }
