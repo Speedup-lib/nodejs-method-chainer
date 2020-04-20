@@ -1,26 +1,8 @@
 /**
- * Library index
+ * Library entry point
  */
 
-class MySuperModule {
+import Conductor from './conductor';
+import * as ConductorFactory from './conductor-factory';
 
-    /**
-     * Person name
-     */
-    private _name: string;
-
-    constructor(name: string) {
-
-        this._name = name;
-    }
-
-    /**
-     * Say hello to the person
-     */
-    sayHello(): string {
-
-        return `Hello ${this._name}`;
-    }
-}
-
-export default MySuperModule;
+export default { Conductor, ConductorFactory };
