@@ -92,6 +92,27 @@ describe('handler-factory', () => {
                     });
             });
 
+            it('should handle callback errors', (cb) => {
+
+                HandlerFactory.wrapAsyncMethod<number, number>(
+                    async (n: number): Promise<number> => { throw new Error('HandledError'); }
+                )
+                    .run(10, (err, result) => {
+
+                        if (!err) { return cb(new Error('UnexpectedError')); }
+
+                        try {
+
+                            expect(err).to.have.property('message').that.is.eq('HandledError');
+                            return cb();
+                        }
+                        catch (err) {
+
+                            return cb(err);
+                        }
+                    });
+            });
+
             it('should invoke the method using promise', async () => {
 
                 const instance = HandlerFactory.wrapAsyncMethod<number, number>(
