@@ -3,8 +3,8 @@
  */
 
 import 'mocha';
-import { expect } from 'chai';
 
-describe('SpeedUP|method-chainer', () => {
+describe('SpeedUP|nodejs-method-chainer', () => {
 
+    describe('lib', () => import('./lib'));
 });
