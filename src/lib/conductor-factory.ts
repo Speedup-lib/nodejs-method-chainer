@@ -13,7 +13,9 @@ class ConductorFactory {
      * Add handler to the chain
      * @param handler Handler
      */
-    handle<TInput, TOutput>(handler: IHandler<TInput, TOutput>) {
+    handle<TInput, TOutput>(handler?: IHandler<TInput, TOutput>) {
+
+        if (!handler) { throw new Error('No hander is provided.'); }
 
         this.handlers.push(handler);
 
