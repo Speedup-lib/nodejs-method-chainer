@@ -30,6 +30,4 @@ class ConductorFactory {
     }
 }
 
-const create = <TInput, TOutput>() => new ConductorFactory();
-
-export { ConductorFactory, create };
+export default ConductorFactory;
