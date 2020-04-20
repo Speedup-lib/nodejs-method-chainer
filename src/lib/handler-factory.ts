@@ -36,13 +36,27 @@ class Handler<TInput, TOutput> implements IHandler<TInput, TOutput> {
      * @param input Input for the function
      */
     async runAsync(input: TInput): Promise<TOutput> {
-        
+
         return await this.handler(input);
     }
 }
 
+/**
+ * Wrap your callback-based method
+ * @param fn Callback-based method
+ */
 const wrapCallbackMethod = <TInput, TOutput>(fn: (callback: (err: any, result: TOutput) => void) => void) => new Handler<TInput, TOutput>(promisify<TOutput>(fn));
+
+/**
+ * Wrap your promise-based method
+ * @param fn Promise-based method
+ */
 const wrapPromiseMethod = <TInput, TOutput>(fn: (input: TInput) => Promise<TOutput>) => new Handler<TInput, TOutput>(fn);
+
+/**
+ * Wrap your moder async/await method
+ * @param fn Async/await method
+ */
 const wrapAsyncMethod = <TInput, TOutput>(fn: (input: TInput) => Promise<TOutput>) => new Handler<TInput, TOutput>(fn);
 
 export { wrapCallbackMethod, wrapPromiseMethod, wrapAsyncMethod, Handler, RequestHandler }
