@@ -1,6 +1,6 @@
 {
   "name": "@speedup/method-chainer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Chain JavaScript/NodeJS methods together to make your code more functional and more readable",
   "main": "dist/index.js",
   "scripts": {
