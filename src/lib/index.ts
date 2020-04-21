@@ -3,6 +3,7 @@
  */
 
 import Conductor from './conductor';
-import * as ConductorFactory from './conductor-factory';
+import ConductorFactory from './conductor-factory';
+import * as HandlerFactory from './handler-factory';
 
-export default { Conductor, ConductorFactory };
+export default { Conductor, ConductorFactory, HandlerFactory };
