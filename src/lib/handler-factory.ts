@@ -59,4 +59,22 @@ const wrapPromiseMethod = <TInput, TOutput>(fn: (input: TInput) => Promise<TOutp
  */
 const wrapAsyncMethod = <TInput, TOutput>(fn: (input: TInput) => Promise<TOutput>) => new Handler<TInput, TOutput>(fn);
 
-export { wrapCallbackMethod, wrapPromiseMethod, wrapAsyncMethod, Handler, RequestHandler }
+/**
+ * Wrap your synchronous method
+ * @param fn Synchronous method
+ */
+const wrapSyncMethod = <TInput, TOutput>(fn: (input: TInput) => TOutput): Handler<TInput, TOutput> =>
+    wrapAsyncMethod<TInput, TOutput>(
+        async (input: TInput): Promise<TOutput> => {
+
+            try {
+                const result = fn(input);
+                return Promise.resolve(result);
+            }
+            catch (err) {
+                return Promise.reject(err);
+            }
+        }
+    );
+
+export { wrapCallbackMethod, wrapPromiseMethod, wrapAsyncMethod, wrapSyncMethod, Handler, RequestHandler }
