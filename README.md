@@ -1,6 +1,6 @@
-# NodeJS method chainer
+# JavaScript/TypeScript method chainer
 
-Chain your NodeJS (JavaScript/TypeScript) callbacks/promises together to handle the most complex workflows in a functional way.
+Chain your JavaScript/TypeScript callbacks/promises together to handle the most complex workflows in a functional way.
 
 [![NPM version][npm-image]][npm-url]
 [![NPM downloads][downloads-image]][downloads-url]
