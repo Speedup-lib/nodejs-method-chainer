@@ -194,5 +194,40 @@ describe('handler-factory', () => {
             });
 
         });
+
+        describe('wrapSyncMethod', () => {
+
+            it('should invoke the method using callback', (cb) => {
+
+                HandlerFactory.wrapSyncMethod<number, number>(
+                    (n: number): number => n * 2
+                )
+                    .run(10, (err, result) => {
+
+                        if (err) { return cb(err); }
+
+                        try {
+
+                            expect(result).to.be.a('number').that.is.eq(20);
+                            return cb();
+                        }
+                        catch (err) {
+
+                            return cb(err);
+                        }
+                    });
+            });
+
+            it('should invoke the method using promise', async () => {
+
+                const instance = HandlerFactory.wrapSyncMethod<number, number>(
+                    (n: number): number => n * 2
+                );
+
+                const result = await instance.runAsync(10);
+                expect(result).to.be.a('number').that.is.eq(20);
+            });
+
+        });
     });
 });
