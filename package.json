@@ -1,6 +1,6 @@
 {
   "name": "@speedup/method-chainer",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Chain your JavaScript/TypeScript callbacks/promises together to handle the most complex workflows in a functional way.",
   "main": "dist/index.js",
   "scripts": {
