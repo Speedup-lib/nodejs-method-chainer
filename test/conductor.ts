@@ -4,8 +4,8 @@
 
 import { expect } from 'chai';
 
-import Conductor from '../../src/lib/conductor';
-import { wrapAsyncMethod } from '../../src/lib/handler-factory';
+import { Conductor } from '../src/conductor';
+import { wrapAsyncMethod } from '../src/handler-factory';
 
 describe('conductor', () => {
 

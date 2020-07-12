@@ -4,7 +4,7 @@
 
 import { expect } from 'chai';
 
-import * as HandlerFactory from '../../src/lib/handler-factory';
+import * as HandlerFactory from '../src/handler-factory';
 
 describe('handler-factory', () => {
 

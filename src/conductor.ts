@@ -4,13 +4,13 @@
 
 import Async from 'async';
 
-import IHandler from './type/handler';
+import { HandlerBase } from './type/handler';
 
-class Conductor {
+export class Conductor {
 
-    private readonly handlers: Array<IHandler<any, any>>;
+    private readonly handlers: Array<HandlerBase<any, any>>;
 
-    constructor(handlers: Array<IHandler<any, any>>) {
+    constructor(handlers: Array<HandlerBase<any, any>>) {
 
         if (!handlers || !Array.isArray(handlers) || handlers.length < 1) {
             throw new Error('No handler is defined.');
@@ -39,7 +39,7 @@ class Conductor {
 
         return new Promise<TOutput>((resolve, reject) => {
 
-            Async.reduce<IHandler<TInput, TOutput>, any>(
+            Async.reduce<HandlerBase<TInput, TOutput>, any>(
                 this.handlers,
                 input,
                 (input, handler, cb) => handler.runAsync(input).then(result => cb(null, result)).catch(cb),
@@ -53,5 +53,3 @@ class Conductor {
         });
     }
 }
-
-export default Conductor;

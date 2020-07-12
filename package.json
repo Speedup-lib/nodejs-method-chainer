@@ -1,13 +1,13 @@
 {
   "name": "@speedup/method-chainer",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Chain your JavaScript/TypeScript callbacks/promises together to handle the most complex workflows in a functional way.",
   "main": "dist/index.js",
   "scripts": {
     "clean": "rimraf dist/",
     "build": "tsc",
     "rebuild": "run-s clean build",
-    "test": "mocha --require ts-node/register tests/index.ts",
+    "test": "mocha --require ts-node/register test/index.ts",
     "coverage": "nyc npm run test",
     "prepublish": "run-s rebuild coverage"
   },
@@ -52,7 +52,7 @@
     "exclude": [
       "coverage/**/*",
       "dist/**/*",
-      "tests/**/*",
+      "test/**/*",
       "**/*.d.ts",
       "src/index.ts",
       "src/lib/index.ts"

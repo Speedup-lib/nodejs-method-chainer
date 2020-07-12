@@ -1,7 +1,9 @@
 /**
- * Module entry point
+ * Library entry point
  */
 
-import lib from './lib';
+import { Conductor } from './conductor';
+import { ConductorBuilder } from './conductor-builder';
+import * as HandlerFactory from './handler-factory';
 
-export default lib;
+export { Conductor, ConductorBuilder, HandlerFactory };

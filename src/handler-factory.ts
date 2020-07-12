@@ -4,11 +4,9 @@
 
 import { promisify } from 'util';
 
-import IHandler from './type/handler';
+export type RequestHandler<TInput, TOutput> = (input: TInput) => Promise<TOutput>;
 
-type RequestHandler<TInput, TOutput> = (input: TInput) => Promise<TOutput>;
-
-class Handler<TInput, TOutput> implements IHandler<TInput, TOutput> {
+export class Handler<TInput, TOutput> implements Handler<TInput, TOutput> {
 
     private readonly handler: RequestHandler<TInput, TOutput>;
 
@@ -45,25 +43,25 @@ class Handler<TInput, TOutput> implements IHandler<TInput, TOutput> {
  * Wrap your callback-based method
  * @param fn Callback-based method
  */
-const wrapCallbackMethod = <TInput, TOutput>(fn: (input: TInput, callback: (err: any, result: TOutput) => void) => void) => new Handler<TInput, TOutput>(promisify<TInput, TOutput>(fn));
+export const wrapCallbackMethod = <TInput, TOutput>(fn: (input: TInput, callback: (err: any, result: TOutput) => void) => void) => new Handler<TInput, TOutput>(promisify<TInput, TOutput>(fn));
 
 /**
  * Wrap your promise-based method
  * @param fn Promise-based method
  */
-const wrapPromiseMethod = <TInput, TOutput>(fn: (input: TInput) => Promise<TOutput>) => new Handler<TInput, TOutput>(fn);
+export const wrapPromiseMethod = <TInput, TOutput>(fn: (input: TInput) => Promise<TOutput>) => new Handler<TInput, TOutput>(fn);
 
 /**
  * Wrap your modern async/await method
  * @param fn Async/await method
  */
-const wrapAsyncMethod = <TInput, TOutput>(fn: (input: TInput) => Promise<TOutput>) => new Handler<TInput, TOutput>(fn);
+export const wrapAsyncMethod = <TInput, TOutput>(fn: (input: TInput) => Promise<TOutput>) => new Handler<TInput, TOutput>(fn);
 
 /**
  * Wrap your synchronous method
  * @param fn Synchronous method
  */
-const wrapSyncMethod = <TInput, TOutput>(fn: (input: TInput) => TOutput): Handler<TInput, TOutput> =>
+export const wrapSyncMethod = <TInput, TOutput>(fn: (input: TInput) => TOutput): Handler<TInput, TOutput> =>
     wrapAsyncMethod<TInput, TOutput>(
         async (input: TInput): Promise<TOutput> => {
 
@@ -76,5 +74,3 @@ const wrapSyncMethod = <TInput, TOutput>(fn: (input: TInput) => TOutput): Handle
             }
         }
     );
-
-export { wrapCallbackMethod, wrapPromiseMethod, wrapAsyncMethod, wrapSyncMethod, Handler, RequestHandler }

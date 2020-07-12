@@ -24,7 +24,7 @@ yarn install @speedup/method-chainer
 ```js
 
 
-const MethodChainer = require('@speedup/method-chainer').default;
+const MethodChainer = require('@speedup/method-chainer');
 
 const factory = new MethodChainer.ConductorFactory();
 
@@ -60,7 +60,7 @@ const result = await conductor.runAsync(2);
 ```ts
 
 
-import MethodChainer from '@speedup/method-chainer';
+import * as MethodChainer from '@speedup/method-chainer';
 
 const factory = new MethodChainer.ConductorFactory();
 

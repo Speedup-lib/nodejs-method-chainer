@@ -2,7 +2,7 @@
  * Handler
  */
 
-interface IHandler<TInput, TOutput> {
+export interface HandlerBase<TInput, TOutput> {
 
     /**
      * Run handler using callback
@@ -17,7 +17,3 @@ interface IHandler<TInput, TOutput> {
      */
     runAsync(input: TInput): Promise<TOutput>;
 }
-
-
-
-export default IHandler;

@@ -4,8 +4,8 @@
 
 import { expect } from 'chai';
 
-import ConductorFactory from '../../src/lib/conductor-factory';
-import { wrapAsyncMethod } from '../../src/lib/handler-factory';
+import { ConductorBuilder } from '../src/conductor-builder';
+import { wrapAsyncMethod } from '../src/handler-factory';
 
 describe('conductor-factory', () => {
 
@@ -13,12 +13,12 @@ describe('conductor-factory', () => {
 
         it('module should be constantly fixed', () => {
 
-            expect(ConductorFactory).to.be.a('function');
+            expect(ConductorBuilder).to.be.a('function');
         });
 
         it('should contain two methods in the instance', () => {
 
-            const instance = new ConductorFactory();
+            const instance = new ConductorBuilder();
 
             expect(instance).to.have.property('handle').that.is.a('function');
             expect(instance).to.have.property('toConductor').that.is.a('function');
@@ -31,7 +31,7 @@ describe('conductor-factory', () => {
 
             it('should throw exception if handler is undefined', async () => {
 
-                const factory = new ConductorFactory();
+                const factory = new ConductorBuilder();
 
                 try {
 
@@ -39,13 +39,13 @@ describe('conductor-factory', () => {
                     throw new Error('UnexpectedError');
                 }
                 catch (err) {
-                    expect(err).to.have.have.property('message').that.is.eq('No hander is provided.');
+                    expect(err).to.have.have.property('message').that.is.eq('No handler is provided.');
                 }
             });
 
             it('should add handler without error', async () => {
 
-                const factory = new ConductorFactory();
+                const factory = new ConductorBuilder();
 
                 factory.handle<number, number>(wrapAsyncMethod(async (n) => n * 2));
                 const conductor = factory.toConductor();
@@ -60,7 +60,7 @@ describe('conductor-factory', () => {
 
             it('should throw error in case of empty handler', async () => {
 
-                const factory = new ConductorFactory();
+                const factory = new ConductorBuilder();
 
                 try {
 
@@ -68,7 +68,7 @@ describe('conductor-factory', () => {
                     throw new Error('UnexpectedError');
                 }
                 catch (err) {
-                    expect(err).to.have.have.property('message').that.is.eq('No hander is provided.');
+                    expect(err).to.have.have.property('message').that.is.eq('No handler is provided.');
                 }
             });
         });
