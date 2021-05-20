@@ -1,6 +1,6 @@
 # JavaScript/TypeScript method chainer
 
-This repository is no longer maintained. Please use the [newer](https://github.com/PuzzleIO/conductor) version.
+## This repository is no longer maintained. Please use the [newer](https://github.com/PuzzleIO/conductor) version.
 
 Chain your JavaScript/TypeScript callbacks/promises together to handle the most complex workflows in a functional way.
 
